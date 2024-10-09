@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UV index</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <style>
+
+        #map {
+
+            height: 400px; /* Set the height of the map */
+
+            margin-bottom: 20px;
+
+        }
+
+    </style>
+</head>
+<body>
+    <h1>UV Index Info</h1>
+
+    <div id="map"></div>
+
+    <form id="uv-form" action="/get-uv" method="POST">
+        <input type="hidden" id="latitude" name="latitude" required>
+        <input type="hidden" id="longitude" name="longitude" required>
+        <button type="submit">Get UV Index</button>
+    </form>
+  
+    <% if (uvIndex !== null) { %>
+        <div>
+            <strong>UV Index:</strong> <%= uvIndex %><br>
+            <strong>UV Max:</strong> <%= uvMax %><br>
+            <strong>UV Max Time:</strong> <%= uvMaxTime %><br>
+            <strong>Safe Exposure Time:</strong> <%= safeExposureTime %> minutes<br>
+            <strong>Sunrise:</strong> <%= sunrise %><br>
+            <strong>Solar Noon:</strong> <%= solarNoon %><br>
+            <strong>Sunset:</strong> <%= sunset %><br>
+        </div>
+    <% } else if (error) { %>
+        <div><%= error %></div>
+    <% } %>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        const map = L.map('map').setView([20, 0], 2); // Initial view
+
+        // Set up the tiles layer using OpenStreetMap tiles
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+            maxZoom: 19,
+
+        }).addTo(map);
+
+        // Add a click event listener to the map
+
+        map.on('click', function(e) {
+            const lat = e.latlng.lat;
+            const lng = e.latlng.lng;
+
+            // Set the values in the hidden input fields
+
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lng;
+
+            // Optionally, you can add a marker to the clicked location
+
+            L.marker([lat, lng]).addTo(map)
+                .bindPopup(`Latitude: ${lat.toFixed(5)}, Longitude: ${lng.toFixed(5)}`)
+                .openPopup();
+        });
+
+    </script>
+<hr />
+<img src="/images/Skincolar.png" alt="The colors of skin blin">
+
+</body>
+</html>
