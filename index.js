@@ -22,14 +22,15 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Basic route
 app.get('/', (req, res) => {
-    res.render('index', { uvIndex: null, error: null });
+    const currentYear = new Date().getFullYear();
+    res.render('index', { uvIndex: null, error: null, year: currentYear });
 });
 
 app.post('/get-uv', async (req, res) => {
     const { latitude, longitude } = req.body;
     const apiKey = 'openuv-1mxfsvrm205plch-io'; // Replace with your actual API key
     const apiUrl = `https://api.openuv.io/api/v1/uv?lat=${latitude}&lng=${longitude}`;
-    const currentYear = new Date().getFullYear();
+    const currentYear = new Date().getFullYear(); // Define currentYear
 
     try {
         const response = await axios.get(apiUrl, {
@@ -73,11 +74,12 @@ app.post('/get-uv', async (req, res) => {
 
             sunset: sunset, // Properly access sunset
             year: currentYear,
+
             error: null
         });
     } catch (error) {
         console.error('Error fetching UV data:', error.response ? error.response.data : error.message);
-        res.render('index', { uvIndex: null, error: error.response?.data?.error || 'Error retrieving data.'});
+        res.render('index', { uvIndex: null, error: error.response?.data?.error || 'Error retrieving data.', year: currentYear});
     }
 });
 
