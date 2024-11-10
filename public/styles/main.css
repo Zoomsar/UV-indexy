@@ -1,21 +1,17 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    background-color: #333;
+    background-color: #000000;
     color: aliceblue;
 }
 
 h1 {
-    color: #333;
-    font-family: "Sixtyfour Convergence", sans-serif;
-    font-optical-sizing: auto;
+    color: #e7b202;
+    font-family: "Cookie", cursive;
     font-weight: 400;
     font-style: normal;
-    font-variation-settings:
-      "BLED" 0,
-      "SCAN" 0,
-      "XELA" 0,
-      "YELA" 0;
+    font-size: 48px;
+    text-align: center;
 }
 
 form {
@@ -24,4 +20,22 @@ form {
 
 input {
     margin-right: 10px;
+}
+
+.info {
+    text-align: center;
+    font-family: "Cookie", cursive;
+    font-weight: 400;
+    font-style: normal;
+    color: #e7b202;
+    font-size: 36px;
+}
+
+.copy {
+    text-align: center;
+    font-family: "Cookie", cursive;
+    font-weight: 400;
+    font-style: normal;
+    color: #e7b202;
+    font-size: 24px;
 }

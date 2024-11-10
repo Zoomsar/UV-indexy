@@ -29,6 +29,7 @@ app.post('/get-uv', async (req, res) => {
     const { latitude, longitude } = req.body;
     const apiKey = 'openuv-1mxfsvrm205plch-io'; // Replace with your actual API key
     const apiUrl = `https://api.openuv.io/api/v1/uv?lat=${latitude}&lng=${longitude}`;
+    const currentYear = new Date().getFullYear();
 
     try {
         const response = await axios.get(apiUrl, {
@@ -71,12 +72,12 @@ app.post('/get-uv', async (req, res) => {
             solarNoon: solarNoon, // Properly access solar noon
 
             sunset: sunset, // Properly access sunset
-            
+            year: currentYear,
             error: null
         });
     } catch (error) {
         console.error('Error fetching UV data:', error.response ? error.response.data : error.message);
-        res.render('index', { uvIndex: null, error: error.response?.data?.error || 'Error retrieving data.' });
+        res.render('index', { uvIndex: null, error: error.response?.data?.error || 'Error retrieving data.'});
     }
 });
 

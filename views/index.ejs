@@ -6,7 +6,7 @@
     <title>UV index</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
@@ -34,14 +34,14 @@
     </form>
   
     <% if (uvIndex !== null) { %>
-        <div>
-            <strong>UV Index:</strong> <%= uvIndex %><br>
-            <strong>UV Max:</strong> <%= uvMax %><br>
-            <strong>UV Max Time:</strong> <%= uvMaxTime %><br>
-            <strong>Safe Exposure Time:</strong> <%= safeExposureTime %> minutes<br>
-            <strong>Sunrise:</strong> <%= sunrise %><br>
-            <strong>Solar Noon:</strong> <%= solarNoon %><br>
-            <strong>Sunset:</strong> <%= sunset %><br>
+        <div class="info">
+            <p>UV Index: <%= uvIndex %></p>
+            <p>UV Max: <%= uvMax %></p>
+            <p>UV Max Time: <%= uvMaxTime %></p>
+            <p>Safe Exposure Time: <%= safeExposureTime %></p>
+            <p>Sunrise: <%= sunrise %></p>
+            <p>Solar Noon: <%= solarNoon %></p>              
+            <p>Sunset: <%= sunset %></p>
         </div>
     <% } else if (error) { %>
         <div><%= error %></div>
@@ -82,5 +82,6 @@
 <hr />
 <img src="/images/Skincolar.png" alt="The colors of skin blin">
 
+<p class="copy">© MF Doomsar <%= year %></p>
 </body>
 </html>
